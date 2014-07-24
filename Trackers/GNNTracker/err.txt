@@ -1,0 +1,106 @@
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    
+    for i in range(X.shape[0]):
+        for j in range(1600):
+            query[0][j] = X[i][j]
+        
+        (nns_inds, nns_dists) = knnsearch(query,X,k+1)
+                                              ^
+------------------------------------------------------------
+
+build_graph.pyx:21:47: Cannot convert 'double [1][1600]' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    
+    for i in range(X.shape[0]):
+        for j in range(1600):
+            query[0][j] = X[i][j]
+        
+        (nns_inds, nns_dists) = knnsearch(query,X,k+1)
+                ^
+------------------------------------------------------------
+
+build_graph.pyx:21:17: Assignment to non-lvalue 'nns_inds'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    
+    for i in range(X.shape[0]):
+        for j in range(1600):
+            query[0][j] = X[i][j]
+        
+        (nns_inds, nns_dists) = knnsearch(query,X,k+1)
+                           ^
+------------------------------------------------------------
+
+build_graph.pyx:21:28: Assignment to non-lvalue 'nns_dists'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    for i in range(X.shape[0]):
+        for j in range(1600):
+            query[0][j] = X[i][j]
+        
+        (nns_inds, nns_dists) = knnsearch(query,X,k+1)
+        while I < len(nns_inds):
+                             ^
+------------------------------------------------------------
+
+build_graph.pyx:22:30: Cannot convert 'int [41]' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            query[0][j] = X[i][j]
+        
+        (nns_inds, nns_dists) = knnsearch(query,X,k+1)
+        while I < len(nns_inds):
+            if nns_inds[I] == i-1:
+                nns_inds.remove(i-1)
+                       ^
+------------------------------------------------------------
+
+build_graph.pyx:24:24: Cannot convert 'int [41]' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        
+        (nns_inds, nns_dists) = knnsearch(query,X,k+1)
+        while I < len(nns_inds):
+            if nns_inds[I] == i-1:
+                nns_inds.remove(i-1)
+                nodes[i-1,0:] = nns_inds
+                                       ^
+------------------------------------------------------------
+
+build_graph.pyx:25:40: Cannot assign type 'int [41]' to 'int'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                nns_inds.remove(i-1)
+                nodes[i-1,0:] = nns_inds
+                break            
+            else:
+                I += 1
+    return nodes
+               ^
+------------------------------------------------------------
+
+build_graph.pyx:29:16: Cannot convert 'int [5000]' to Python object
+Traceback (most recent call last):
+  File "setup.py", line 5, in <module>
+    ext_modules=cythonize("build_graph.pyx"),
+  File "/usr/lib/pymodules/python2.7/Cython/Build/Dependencies.py", line 517, in cythonize
+    cythonize_one(pyx_file, c_file, quiet, options)
+  File "/usr/lib/pymodules/python2.7/Cython/Build/Dependencies.py", line 540, in cythonize_one
+    raise CompileError(None, pyx_file)
+Cython.Compiler.Errors.CompileError: build_graph.pyx
