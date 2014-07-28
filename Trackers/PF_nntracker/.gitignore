@@ -1,0 +1,10 @@
+*~
+*.pyc
+*.DS_Store
+.project
+.pydevproject
+build
+msg_gen
+src/NNTracker/msg
+*.so
+*.c
