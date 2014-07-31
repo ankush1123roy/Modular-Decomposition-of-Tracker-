@@ -244,7 +244,7 @@ class InteractiveTrackingApp:
     def on_frame(self, img, numtimes):
         #print "frame: ", numtimes
         if self.first_call:
-            self.gui_obj.initWidgets()
+            self.gui_obj.initWidgets(start_label='Reset')
             self.first_call=False
 
         self.count+=1
@@ -280,9 +280,6 @@ class InteractiveTrackingApp:
 
         self.tracker.update(self.proc_img)
         self.corners = self.tracker.get_region()
-        #print "in on_frame"
-        #print "self.corners=", self.corners
-        #input('Nziora')
 
         if not self.from_cam:
             self.actual_corners = [self.ground_truth[self.times - 1, 0:2].tolist(),

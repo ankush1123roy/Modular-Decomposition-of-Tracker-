@@ -39,6 +39,10 @@ class GUI:
         self.frames_created=False
         self.no_of_rows=0
         self.first_instance=True
+        self.first_call=True
+
+        self.start_button_label='Start'
+        self.cancel_button_label='Exit'
 
         self.initWidgets()
         self.root.mainloop()
@@ -160,12 +164,14 @@ class GUI:
         self.divide_label.pack(side=tk.LEFT)
 
     def createButtons(self):
-        button_ok = tk.Button(self.parent_frames[-1], text="OK", command=self.ok, padx=10)
+        button_ok = tk.Button(self.parent_frames[-1], text=self.start_button_label,
+                              command=self.ok, padx=10)
         button_ok.pack(side=tk.LEFT)
-        button_cancel = tk.Button(self.parent_frames[-1], text="CANCEL", command=self.cancel, padx=10)
+        button_cancel = tk.Button(self.parent_frames[-1], text=self.cancel_button_label,
+                                  command=self.cancel, padx=10)
         button_cancel.pack(side=tk.LEFT)
 
-    def initWidgets(self):
+    def initWidgets(self, start_label=None):
         if self.first_instance:
             self.first_instance=False
         else:
@@ -176,6 +182,9 @@ class GUI:
 
         if self.frames_created:
             self.removeFrames()
+
+        if start_label!=None:
+            self.start_button_label=start_label
 
         self.widgets=self.top_widgets+self.param_widgets+self.data_widgets
         self.no_of_rows=len(self.widgets)
@@ -224,7 +233,8 @@ class GUI:
         self.setTrackingParams()
         if not self.obj.initSystem(init_params):
             sys.exit()
-        if self.obj.first_call:
+        if self.first_call:
+            self.first_call=False
             self.destroyRoot()
         else:
             self.obj.reset=True

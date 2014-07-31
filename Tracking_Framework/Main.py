@@ -163,6 +163,7 @@ class StandaloneTrackingApp(InteractiveTrackingApp):
 
     def animate(self, i):
         if not self.keyboardHandler():
+            self.writeResults()
             sys.exit()
 
         if self.paused:
